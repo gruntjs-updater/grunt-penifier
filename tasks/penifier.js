@@ -6,45 +6,27 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+ 'use strict';
 
-module.exports = function(grunt) {
+ module.exports = function(grunt) {
 
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('penifier', 'This is a Grunt plugin that turns comments into penis.  Don't use this for anything.', function() {
+  grunt.registerMultiTask('penifier', 'Penify your comments.  Dont use this for anything.', function() {
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       punctuation: '.',
       separator: ', '
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+this.files.forEach(function(f) {
+  var src = grunt.file.read(f.src).replace(/\/\*\w*\*\//g,"\/*penis*\/").replace(/\/\/\w*\n/,"\/\/8=======D");
+  grunt.file.write(f.dest, src);
+  grunt.log.writeln('File "' + f.dest + '" created.');
+}
+);
 
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
-
+});
 };
