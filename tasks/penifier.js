@@ -33,41 +33,44 @@ module.exports = function(grunt) {
   this.files.forEach(function(f) {
     var src = grunt.file.read(f.src);
     if(options.visual && !options.matchlength) {
+    //visual logic
       src = src.replace(multlncmtregex,"\/*8===D*\/").replace(cmtregex,'//8===D');
     } else if (options.matchlength) {
+    //variable length logics
       var priorLastIndex = 0,
       current,
-      csource;
-      /*
-      while ((current = cmtregex.exec(src)) != null ) {
-        var len = (current.index - cmtregex.lastIndex);
-        var pencomment = '8'+ '='.repeat('len'-2) + 'D';
-        if(src['cmtregex.lastIndex']) {
-        src = src.slice(0,current.index) + '//' + pencomment + src.slice(cmtregex.lastIndex);
-        }
-      }
-      
-      while ((current = cmtregex.exec(src)) != null) {
-        csource = csource + src.slice(priorLastIndex, current.index);
-        var len = (current.index - cmtregex.lastIndex);
-        csource = csource + '8'+ '='.repeat('len'-2) + 'D';
-        priorLastIndex = cmtregex.lastIndex;
-        console.log(priorLastIndex);
-      }
-      */
+      csource = '';
+
+      /* this logic is old and sharty because it manipulates what it iterates through
+      //i really should not be manipulating src while iterating through it with exec
+      //(the for loop iterable syntax problem)
       while ((current = cmtregex.exec(src)) != null) {
         var len = (cmtregex.lastIndex - current.index - 4);
         var pencomment = '';
         if (len > 0) {
           pencomment = '8' + '='.repeat(len) + 'D';
-          console.log(pencomment);
         }
         src = src.slice(0,current.index) + '//' + pencomment + src.slice(cmtregex.lastIndex);
         
         var test = src.substring(0,cmtregex.lastIndex);
       }
+      */
+
+      while ((current = cmtregex.exec(src)) != null) {
+        var len = (cmtregex.lastIndex - current.index - 4);
+        var pencomment = '8===D';
+        if (len > 0) {
+          pencomment = '8' + '='.repeat(len) + 'D';
+        }
+        csource = csource + src.slice(priorLastIndex,current.index) + '//' + pencomment;
+        priorLastIndex = cmtregex.lastIndex;
+      }
+      csource = csource + src.slice(priorLastIndex);
+      src = csource;
+
 
     } else {
+    //default logic
       src = src.replace(multlncmtregex,"\/*penis*\/").replace(cmtregex,'//penis');
     }
 
