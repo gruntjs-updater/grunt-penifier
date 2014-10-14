@@ -37,6 +37,24 @@ module.exports = function(grunt) {
           'tmp/default_options': ['test/fixtures/testing']
         }
       },
+      visual_true: {
+        options: {
+          visual: true
+        },
+        files: {
+          'tmp/visual_true': ['test/fixtures/testing']
+        }
+      },
+      
+      matchlength_true: {
+        options: {
+          matchlength: true
+        },
+        files: {
+          'tmp/matchlength_true': ['test/fixtures/varlengthtesting']
+        }
+      },
+      
     },
 
     // Unit tests.
