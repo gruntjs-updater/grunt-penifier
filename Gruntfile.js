@@ -37,18 +37,26 @@ module.exports = function(grunt) {
           'tmp/default_options': ['test/fixtures/testing']
         }
       },
-      visual_true: {
+      ascii_mode: {
         options: {
-          visual: true
+          style: 'ascii'
         },
         files: {
-          'tmp/visual_true': ['test/fixtures/testing']
+          'tmp/ascii_mode': ['test/fixtures/testing']
+        }
+      },
+      text_mode: {
+        options: {
+          style: 'text'
+        },
+        files: {
+          'tmp/text_mode': ['test/fixtures/testing']
         }
       },
       
       matchlength_true: {
         options: {
-          matchlength: true
+          style: 'text'
         },
         files: {
           'tmp/matchlength_true': ['test/fixtures/varlengthtesting']

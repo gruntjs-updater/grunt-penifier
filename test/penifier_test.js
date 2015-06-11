@@ -32,16 +32,25 @@ exports.penifier = {
 
     var actual = grunt.file.read('tmp/default_options');
     var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'comments should read penis.');
+    test.equal(actual, expected, 'comments should read 8===D.');
 
     test.done();
   },
-  visual_true: function(test) {
+  ascii_mode: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/visual_true');
-    var expected = grunt.file.read('test/expected/visual_true');
+    var actual = grunt.file.read('tmp/ascii_mode');
+    var expected = grunt.file.read('test/expected/ascii_mode');
     test.equal(actual, expected, 'comments should read 8===D.');
+
+    test.done();
+  },
+  text_mode: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/text_mode');
+    var expected = grunt.file.read('test/expected/text_mode');
+    test.equal(actual, expected, 'comments should read penis.');
 
     test.done();
   },
