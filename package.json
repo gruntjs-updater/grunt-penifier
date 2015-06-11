@@ -1,7 +1,7 @@
 {
   "name": "grunt-penifier",
   "description": "This is a Grunt plugin that turns comments into penis.  Don't use this for anything.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/romnempire/grunt-penifier",
   "author": {
     "name": "Roman",
